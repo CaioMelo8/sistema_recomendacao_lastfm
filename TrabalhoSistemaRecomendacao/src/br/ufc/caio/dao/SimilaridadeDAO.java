@@ -21,7 +21,7 @@ public class SimilaridadeDAO {
 	public void insertSimilaridade(Similaridade similaridade){
 		PreparedStatement stmt;
 		
-		String query = "INSERT INTO similaridade(user1, user2, similaridade) VALUES (?,?,?)";
+		String query = DAOMessages.getString("SimilaridadeDAO.insert_similaridade_query"); //$NON-NLS-1$
 		
 		try{
 			stmt = connection.prepareStatement(query);
@@ -41,7 +41,7 @@ public class SimilaridadeDAO {
 		PreparedStatement stmt;
 		ResultSet result;
 		
-		String query  = "SELECT user2 FROM similaridade WHERE user1 = ? AND similaridade >= ?";
+		String query  = DAOMessages.getString("SimilaridadeDAO.get_similaridade_by_user_query"); //$NON-NLS-1$
 		
 		List<String> usuariosSimilares = new ArrayList<>();
 				
@@ -55,7 +55,7 @@ public class SimilaridadeDAO {
 			result = stmt.executeQuery();
 			
 			while (result.next()){				
-				user2 = result.getString("user2");											
+				user2 = result.getString(DAOMessages.getString("SimilaridadeDAO.field_user"));											 //$NON-NLS-1$
 				
 				usuariosSimilares.add(user2);
 			}

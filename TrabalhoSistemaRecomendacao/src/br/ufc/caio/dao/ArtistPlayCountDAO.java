@@ -22,7 +22,7 @@ public class ArtistPlayCountDAO {
 		PreparedStatement stmt;
 		ResultSet result;
 		
-		String query = "SELECT play_count FROM artist_play_count_norm WHERE user_sha1 = ? ORDER BY art_name";
+		String query = DAOMessages.getString("ArtistPlayCountDAO.get_count_array_by_user_query"); //$NON-NLS-1$
 		
 		List<Double> inteiros = new ArrayList<>();				
 		try{
@@ -32,7 +32,7 @@ public class ArtistPlayCountDAO {
 			result = stmt.executeQuery();
 			
 			while (result.next()){
-				inteiros.add(result.getDouble("play_count"));
+				inteiros.add(result.getDouble(DAOMessages.getString(DAOMessages.getString("ArtistPlayCountDAO.field_play_count"))));  //$NON-NLS-1$
 			}
 			
 			return (Double[]) inteiros.toArray(new Double[inteiros.size()]);
@@ -46,7 +46,7 @@ public class ArtistPlayCountDAO {
 	public List<String> getTopArtistsBySimilarUser(String user, String userSimilar){
 		PreparedStatement stmt;
 		
-		String query = "SELECT art_name, play_count FROM (SELECT art_name, play_count FROM artist_play_count_norm WHERE user_sha1 = ? and play_count > 0) AS A WHERE A.art_name NOT in (SELECT art_name FROM artist_play_count_norm WHERE user_sha1 = ? and play_count > 0) LIMIT 5;";
+		String query = DAOMessages.getString("ArtistPlayCountDAO.get_top_artists_query"); //$NON-NLS-1$
 		
 		List<String> artNames = new ArrayList<>();
 		String artName;
@@ -59,7 +59,7 @@ public class ArtistPlayCountDAO {
 			ResultSet result = stmt.executeQuery();
 			
 			while (result.next()){
-				artName = result.getString("art_name");
+				artName = result.getString("art_name"); //$NON-NLS-1$
 				
 				artNames.add(artName);
 			}
@@ -77,11 +77,11 @@ public class ArtistPlayCountDAO {
 		PreparedStatement stmt;
 		ResultSet result;		
 		
-		String query = "SELECT DISTINCT art_name FROM artist_play_count_norm WHERE art_name NOT IN (SELECT art_name FROM artist_play_count_norm WHERE user_sha1 = ?)";
+		String query = DAOMessages.getString("ArtistPlayCountDAO.complete_artist_query"); //$NON-NLS-1$
 		
 		String artistName = null;
 		String userSha1 = user.getUserSha1();
-		String artisMbid = "";
+		String artisMbid = ""; //$NON-NLS-1$
 		double playCount = 0;
 				
 		try{
@@ -104,7 +104,7 @@ public class ArtistPlayCountDAO {
 	public void insertArtistPlayCount(ArtistPlayCount artisttPlayCount){
 		PreparedStatement stmt;
 		
-		String query = "INSERT INTO artist_play_count_norm(user_sha1, art_mbid, art_name, play_count) VALUES (?,?,?,?)";
+		String query = DAOMessages.getString("ArtistPlayCountDAO.insert_artist_play_count_query"); //$NON-NLS-1$
 		
 		try{
 			stmt = connection.prepareStatement(query);

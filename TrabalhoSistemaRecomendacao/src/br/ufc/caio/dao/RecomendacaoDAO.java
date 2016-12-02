@@ -16,7 +16,7 @@ public class RecomendacaoDAO {
 	public void insertRecomendacao(Recomendacao recomendacao){
 		PreparedStatement stmt;
 		
-		String query = "INSERT INTO recomendacao (user_sha1, art_name) VALUES (?,?)";
+		String query = DAOMessages.getString("RecomendacaoDAO.insert_recomendacao_query"); //$NON-NLS-1$
 		
 		try{
 			stmt = connection.prepareStatement(query);
