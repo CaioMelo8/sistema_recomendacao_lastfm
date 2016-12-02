@@ -7,7 +7,7 @@ import br.ufc.caio.dao.ArtistPlayCountDAO;
 import br.ufc.caio.dao.UserDAO;
 import br.ufc.caio.model.User;
 
-public class Main {
+public class ArtistPlayCountCompleteMain {
 	public static void main(String[] args) {
 		UserDAO dao = new UserDAO(Connection.getConnection());
 		List<User> users = dao.getAllUsers();		
