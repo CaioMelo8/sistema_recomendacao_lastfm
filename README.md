@@ -18,6 +18,7 @@ CREATE DATABASE sistema_recomendacao_2;
 DROP TABLE artist_play_count;
 
 CREATE TABLE artist_play_count (id serial, user_sha1 varchar(40), art_mbid varchar(40), art_name varchar, play_count int, PRIMARY KEY(id));
+
 COPY artist_play_count(user_sha1, art_mbid, art_name, play_count) FROM **path_of_the_TSV_file** DELIMITER E'\t';
 -- (COPY 17559529 linhas copiadas)
 ```
@@ -38,6 +39,7 @@ ALTER TABLE user_profile ALTER COLUMN age TYPE integer USING age::integer;
 ```
 
 - Todos os registros na tabela artist_play_count com menos de 200 execuções foram removidos.
+
 ```SQL
 SELECT count(*) FROM artist_play_count WHERE play_count < 200;
 
@@ -122,7 +124,7 @@ DELETE FROM number_user_entries WHERE user_sha1 NOT in (SELECT DISTINCT user_sha
 
 - A tabela similaridade foi criada, e serve para armazenar o resultado da similaridade entre os usuários.
 
-```
+```SQL
 DROP TABLE similaridade;
 
 CREATE TABLE similaridade(id serial, user1 varchar(40), user2 varchar(40), similaridade double precision, PRIMARY KEY(id));
