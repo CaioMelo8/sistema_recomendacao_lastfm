@@ -12,7 +12,7 @@ Os procedimentos necessários para reproduzir o projeto são explicitados a segu
 CREATE DATABASE sistema_recomendacao_2;
 ```
 
-- Os registros do número de execuções de um artista por um usuário foram armazenados na tabela artist_play_count;
+- Os registros do número de execuções de um artista por um usuário foram armazenados na tabela artist_play_count.
 
 ```SQL
 DROP TABLE artist_play_count;
@@ -23,7 +23,7 @@ COPY artist_play_count(user_sha1, art_mbid, art_name, play_count) FROM **path_of
 -- (COPY 17559529 linhas copiadas)
 ```
   
-- Os registros contendo os dados do usuário foram armazenados na tabela user_profile;
+- Os registros contendo os dados do usuário foram armazenados na tabela user_profile.
 
 ```SQL
 DROP TABLE user_profile;
@@ -141,11 +141,13 @@ INSERT INTO artist_play_count_norm(user_sha1, art_mbid, art_name, play_count) SE
 ```
 
 - Para todos os usuários, a tabela artist_play_count foi preenchida com os artistas que o usuário não escutou nenhuma vez. Os registros para esses usuários foram inseridos tendo como play_count o valor 0. (10631062 registros no total)
+  (Para referência, ver as classes [ArtistPlayCountCompleteMain](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/main/ArtistPlayCountCompleteMain.java) e [ArtistPlayCountDAO](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/dao/ArtistPlayCountDAO.java).
 
 - O algoritmo de cálculo de similaridade foi executado, a fim de calcular a similaridade entre todos os usuários. os resultados foram salvos a tabela similaridade.
+  (Para referência, ver as classes [CalculoSimilaridadeMain](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/main/CalculoSimilaridadeMain.java) e [SimilaridadeDAO](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/dao/SimilaridadeDAO.java).
 
 - A segunda parte do algoritmo calculou os artistas a serem recomendados para cada usuário, baseados nos demais usuários que possuem uma similaridade de, ao menos, 40%.
-  Para cada dupla de usuários, foram recomendados até 5 artistas.
+  Para cada dupla de usuários, foram recomendados até 5 artistas.  (Para referência, ver as classes [RecomendacaoMain](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/main/RecomendacaoMain.java) e [RecomendacaoDAO](https://github.com/CaioMelo8/sistema_recomendacao_lastfm/blob/master/TrabalhoSistemaRecomendacao/src/br/ufc/caio/dao/RecomendacaoDAO.java).
 
 - A tabela recommendacoes foi criada, para armazenar as recommendacoes de artista para cada usuario.
 
