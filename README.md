@@ -6,6 +6,12 @@ Os procedimentos necessários para reproduzir o projeto são explicitados a segu
 
 # Procedimentos
 
+- O banco de dados foi criado.
+
+```SQL
+CREATE DATABASE sistema_recomendacao_2;
+```
+
 - Os registros do número de execuções de um artista por um usuário foram armazenados na tabela artist_play_count;
 
 ```SQL
